@@ -9,15 +9,4 @@ public class TestData {
 
     //ссылка страницы авторизации
     public final static String URL_LOGIN = URL + "login/";
-
-    //ссылка страницы Профиля
-    public final static String URL_PROFILE = URL + "account/profile/";
-
-
-
-
-
-    //ссылка страницы заказа
-    public final static String URL_ORDER = "";
-
 }

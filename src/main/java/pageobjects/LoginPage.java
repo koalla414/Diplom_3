@@ -2,7 +2,6 @@ package pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import model.TestData;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -52,6 +51,9 @@ public class LoginPage extends Header {
     public MainPage clickBtnEnter() {
         btnEnter.shouldBe(visible).click();
         return page(MainPage.class);
+    }
+    public boolean isBtnEnterDisplayed() {
+        return btnEnter.shouldBe(visible).isDisplayed();
     }
 
     // ссылка Восстановить пароль

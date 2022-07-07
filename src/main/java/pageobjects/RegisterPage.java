@@ -2,7 +2,6 @@ package pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import model.TestData;
-import model.User;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 

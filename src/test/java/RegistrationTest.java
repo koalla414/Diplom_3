@@ -3,12 +3,12 @@ import com.codeborne.selenide.Selenide;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import model.Base;
 import model.TestData;
 import model.User;
 import model.UserCredentials;
 import org.junit.Test;
-import pageobjects.*;
+import pageobjects.MainPage;
+import pageobjects.RegisterPage;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 import static org.junit.Assert.assertTrue;

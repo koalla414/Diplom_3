@@ -1,6 +1,5 @@
 package pageobjects;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Data;
 import model.TestData;
@@ -43,6 +42,42 @@ public class MainPage extends Header{
     private static SelenideElement madeBurger;
     //метод проверки отображения заголовка "Соберите бургер"
     public static boolean isMadeBurgerDisplayed() {
-        return madeBurger.isDisplayed();
+        return madeBurger.shouldBe(visible).isDisplayed();
+    }
+
+    // вкладка "Булки"
+    @FindBy(how = How.XPATH, using = "//span[@class = 'text text_type_main-default' and contains(text(), 'Булки')]")
+    private static SelenideElement btnBuns;
+    // метод клика по разделу Булки
+    public MainPage clickBtnBuns() {
+        btnBuns.shouldBe(visible).click();
+        return this;
+    }
+    public boolean isSectionBunsDisplayed() {
+        return btnBuns.parent().attr("class").contains("tab_tab_type_current__2BEPc");
+    }
+
+    // вкладка "Соусы"
+    @FindBy(how = How.XPATH, using = "//span[@class = 'text text_type_main-default' and contains(text(), 'Соусы')]")
+    private static SelenideElement btnSauces;
+    // метод клика по разделу Булки
+    public MainPage clickBtnSauces() {
+        btnSauces.shouldBe(visible).click();
+        return this;
+    }
+    public boolean isSectionSaucesDisplayed() {
+        return btnSauces.parent().attr("class").contains("tab_tab_type_current__2BEPc");
+    }
+
+    // вкладка "Начинки"
+    @FindBy(how = How.XPATH, using = "//span[@class = 'text text_type_main-default' and contains(text(), 'Начинки')]")
+    private static SelenideElement btnFillings;
+    // метод клика по разделу Булки
+    public MainPage clickBtnFillings() {
+        btnFillings.shouldBe(visible).click();
+        return this;
+    }
+    public boolean isSectionFillingsDisplayed() {
+        return btnFillings.parent().attr("class").contains("tab_tab_type_current__2BEPc");
     }
 }

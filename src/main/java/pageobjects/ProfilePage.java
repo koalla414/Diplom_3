@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class ProfilePage extends Header {
     // поле Имя
     @FindBy(how = How.XPATH, using = "")
@@ -35,9 +37,9 @@ public class ProfilePage extends Header {
     @FindBy(how = How.XPATH, using = "//button[contains(text(),'Выход')]")
     private SelenideElement btnExit;
     // метод клика по кнопке Выход
-    public ProfilePage clickBtnExit() {
+    public LoginPage clickBtnExit() {
         btnExit.click();
-        return this;
+        return page(LoginPage.class);
     }
 
     // Профиль

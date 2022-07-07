@@ -1,7 +1,6 @@
 package pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import model.TestData;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -27,12 +26,21 @@ public class Header {
     }
 
     // кнопка Конструктор
-    @FindBy(how = How.XPATH, using = "//a[@class='AppHeader_header__link__3D_hX AppHeader_header__link_active__1IkJo']")
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Конструктор')]")
     private SelenideElement btnConstructor;
 
     // метод клика по кнопке Конструктор
     public MainPage clickBtnConstructor() {
         btnConstructor.shouldBe(visible).click();
+        return page(MainPage.class);
+    }
+
+    // логотип Stellar Burgers
+    @FindBy(how = How.CSS, using = ".AppHeader_header__logo__2D0X2 a")
+    private SelenideElement logoStellarBurgers;
+    // метод клика по кнопке Конструктор
+    public MainPage clickLogoStellarBurgers() {
+        logoStellarBurgers.shouldBe(visible).click();
         return page(MainPage.class);
     }
 }
