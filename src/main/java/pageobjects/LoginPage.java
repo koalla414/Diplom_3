@@ -54,9 +54,12 @@ public class LoginPage extends Header {
         return page(MainPage.class);
     }
 
-
-
-//    // метод отображения _________________ при авторизации
-//    public boolean is(String email, String password) {
-//        click
+    // ссылка Восстановить пароль
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Восстановить пароль')]")
+    private SelenideElement lnkForgotPassword;
+    // метод клика кнопки Войти
+    public ForgotPasswordPage clickLnkForgotPassword() {
+        lnkForgotPassword.shouldBe(visible).click();
+        return page(ForgotPasswordPage.class);
+    }
 }
