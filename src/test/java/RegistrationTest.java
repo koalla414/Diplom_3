@@ -6,14 +6,26 @@ import io.restassured.response.Response;
 import model.TestData;
 import model.User;
 import model.UserCredentials;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import pageobjects.MainPage;
 import pageobjects.RegisterPage;
+import utils.BrowserConfig;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 import static org.junit.Assert.assertTrue;
 
 public class RegistrationTest {
+    @Before
+    public void setup() {
+        BrowserConfig.initBrowser();
+    }
+    @After
+    public void delTestUser() {
+        Selenide.webdriver().driver().close(); // закрыли браузер
+    }
+
     @Test
     @DisplayName("Успешная регистрация по кнопке Личный кабинет")
     public void checkRegisterByButtonPersonalAccount() {

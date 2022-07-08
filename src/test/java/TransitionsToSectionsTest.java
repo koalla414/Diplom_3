@@ -5,11 +5,13 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import model.TestData;
 import model.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pageobjects.LoginPage;
 import pageobjects.MainPage;
 import pageobjects.ProfilePage;
+import utils.BrowserConfig;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 import static org.junit.Assert.assertTrue;
@@ -20,8 +22,13 @@ public class TransitionsToSectionsTest {
 
     @Before
     public void setup() {
+        BrowserConfig.initBrowser();
         userClient = new UserClient();
         user = User.getRandomUser(); // сгенерировали данные пользователя
+    }
+    @After
+    public void delTestUser() {
+        Selenide.webdriver().driver().close(); // закрыли браузер
     }
 
     @Test

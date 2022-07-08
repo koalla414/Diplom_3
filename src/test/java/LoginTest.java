@@ -10,15 +10,18 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pageobjects.MainPage;
+import utils.BrowserConfig;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 
-public class LoginTest {private UserClient userClient;
+public class LoginTest {
+    private UserClient userClient;
     private User user;
     String accessToken;
 
     @Before
     public void setup() {
+        BrowserConfig.initBrowser();
         userClient = new UserClient();
         user = User.getRandomUser(); // сгенерировали данные пользователя
         ExtractableResponse<Response> createResponse = userClient.create(user); // регистрация пользователя - отправили сгенерированные данные на ручку АПИ
@@ -28,6 +31,7 @@ public class LoginTest {private UserClient userClient;
     @After
     public void delTestUser() {
         userClient.delete(accessToken); // удалили пользователя
+        Selenide.webdriver().driver().close(); // закрыли браузер
     }
 
     @Test
