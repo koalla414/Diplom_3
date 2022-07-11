@@ -18,6 +18,7 @@ public class LoginTest {
     private UserClient userClient;
     private User user;
     String accessToken;
+    MainPage openPage;
 
     @Before
     public void setup() {
@@ -26,6 +27,8 @@ public class LoginTest {
         user = User.getRandomUser(); // сгенерировали данные пользователя
         ExtractableResponse<Response> createResponse = userClient.create(user); // регистрация пользователя - отправили сгенерированные данные на ручку АПИ
         accessToken = createResponse.path("accessToken"); // получили accessToken
+        openPage = Selenide.open(TestData.URL, MainPage.class); // открываем главную страницу
+        webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
     }
 
     @After
@@ -37,8 +40,6 @@ public class LoginTest {
     @Test
     @DisplayName("вход по кнопке «Войти в аккаунт» на главной")
     public void checkLoginByButtonEnterOnMainPage() {
-        MainPage openPage = Selenide.open(TestData.URL, MainPage.class); // открываем главную страницу
-        webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
         openPage.clickBtnLogin() // нажимаем кнопу Войти в аккаунт
                 .setInputEmail(user.getEmail()) // заполняем поле email
                 .setInputPassword(user.getPassword()) // заполняем поле Пароль
@@ -49,8 +50,6 @@ public class LoginTest {
     @Test
     @DisplayName("вход через кнопку «Личный кабинет»")
     public void checkLoginByButtonPersonalAccount() {
-        MainPage openPage = Selenide.open(TestData.URL, MainPage.class); // открываем главную страницу
-        webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
         openPage.clickBtnLogin() // нажимаем кнопу
                 .setInputEmail(user.getEmail()) // заполняем поле email
                 .setInputPassword(user.getPassword()) // заполняем поле Пароль
@@ -61,8 +60,6 @@ public class LoginTest {
     @Test
     @DisplayName("вход через ссылку в форме регистрации")
     public void checkLoginByLinkOnRegisterPage() {
-        MainPage openPage = Selenide.open(TestData.URL, MainPage.class); // открываем страницу регистрации
-        webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
         openPage.clickBtnLogin()
                 .clickLinkRegister()
                 .clickLnkEnter() // нажимаем кнопу
@@ -75,8 +72,6 @@ public class LoginTest {
     @Test
     @DisplayName("вход через кнопку в форме восстановления пароля")
     public void checkLoginByBtnOnForgotPasswordPage() {
-        MainPage openPage = Selenide.open(TestData.URL, MainPage.class); // открываем страницу регистрации
-        webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
         openPage.clickBtnLogin()
                 .clickLnkForgotPassword()
                 .clickLnkEnter()

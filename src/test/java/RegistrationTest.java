@@ -22,7 +22,7 @@ public class RegistrationTest {
         BrowserConfig.initBrowser();
     }
     @After
-    public void delTestUser() {
+    public void clauseBrowser() {
         Selenide.webdriver().driver().close(); // закрыли браузер
     }
 
@@ -64,6 +64,7 @@ public class RegistrationTest {
     @Test
     @DisplayName("Проверка ошибки для некорректного пароля (менее шести символов).")
     public void checkErrorByShortPassword() {
+        String shortPassword = "Passw";
         User user = User.getRandomUser();
         MainPage openPage = Selenide.open(TestData.URL, MainPage.class); // открываем главную страницу
         webdriver().driver().getWebDriver().manage().window().maximize(); // разворачиваем окно браузера во весь экран
@@ -71,8 +72,18 @@ public class RegistrationTest {
                 .clickLinkRegister() //нажимаем ссылку Зарегистрироваться
                 .setInputName(user.getName()) // заполняем поле Имя
                 .setInputEmail(user.getEmail()) // заполняем поле email
-                .setInputPassword("Passw") // заполняем поле Пароль
+                .setInputPassword(shortPassword) // заполняем поле Пароль
                 .clickBtnRegistrationByShortPassword(); // нажимаем Зарегистрироваться
+        // если пользователь создался, то удаляем его
+        if (!page.isPasswordErrorDisplayed()) {
+        user.setPassword(shortPassword);
+        UserCredentials creds = UserCredentials.from(user); // получаем учетные данные созданного пользователя для авторизации
+        UserClient userClient = new UserClient();
+        ExtractableResponse<Response> loginResponse = userClient.login(creds); // авторизуемся с полученными учетными данными созданного пользователя
+        String accessToken = loginResponse.path("accessToken"); // получили accessToken
+        userClient.delete(accessToken); // удалили пользователя
+
         assertTrue(page.isPasswordErrorDisplayed()); //проверяем, что отображается ошибка Некорректный пароль
+        }
     }
 }

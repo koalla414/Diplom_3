@@ -11,6 +11,7 @@ public class ForgotPasswordPage extends Header {
     // ссылка Войти
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Войти')]")
     private SelenideElement lnkEnter;
+
     // метод клика по кнопке Зарегистрироваться
     public LoginPage clickLnkEnter() {
         lnkEnter.shouldBe(visible).click();

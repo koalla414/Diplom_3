@@ -27,7 +27,7 @@ public class TransitionsToSectionsTest {
         user = User.getRandomUser(); // сгенерировали данные пользователя
     }
     @After
-    public void delTestUser() {
+    public void clauseBrowser() {
         Selenide.webdriver().driver().close(); // закрыли браузер
     }
 
@@ -46,7 +46,6 @@ public class TransitionsToSectionsTest {
                 .clickBtnEnter() // нажать кнопку Войти
                 .clickBtnPersonalAccountByAuthorizedUser(); // нажимаем кнопку Личный кабинет - попадаем на страницу авторизации
         assertTrue(page.checkProfileDisplayed()); //проверяем, что отображается меню Профиль
-
         userClient.delete(accessToken); // удалили пользователя
     }
 
