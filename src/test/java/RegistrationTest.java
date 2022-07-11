@@ -82,8 +82,7 @@ public class RegistrationTest {
         ExtractableResponse<Response> loginResponse = userClient.login(creds); // авторизуемся с полученными учетными данными созданного пользователя
         String accessToken = loginResponse.path("accessToken"); // получили accessToken
         userClient.delete(accessToken); // удалили пользователя
-
-        assertTrue(page.isPasswordErrorDisplayed()); //проверяем, что отображается ошибка Некорректный пароль
         }
+        assertTrue(page.isPasswordErrorDisplayed()); //проверяем, что отображается ошибка Некорректный пароль
     }
 }
